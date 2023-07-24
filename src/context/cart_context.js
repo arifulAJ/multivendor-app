@@ -49,6 +49,7 @@ const CartProvider = ({ children }) => {
   };
 
   // to add the data in localStorage
+  
   const key = 'thapaCart'; // Replace 'myData' with the key you want to use in localStorage
 
 // Step 1: Check if data exists in localStorage for the specific key
