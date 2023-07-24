@@ -5,16 +5,17 @@ const CartContext = createContext();
 
 const getLocalCartData = () => {
   let localCartData = localStorage.getItem("thapaCart");
+  console.log(localCartData)
   if (localCartData === []) {
     return [];
   } else {
     return JSON.parse(localCartData);
   }
 };
-
+console.log(getLocalCartData())
 const initialState = {
-  // cart: [],
-  cart: getLocalCartData(),
+  //  cart: [],
+   cart: getLocalCartData(),
   total_item: "",
   total_price: "",
   shipping_fee: 50000,
@@ -48,6 +49,16 @@ const CartProvider = ({ children }) => {
   };
 
   // to add the data in localStorage
+  const key = 'thapaCart'; // Replace 'myData' with the key you want to use in localStorage
+
+// Step 1: Check if data exists in localStorage for the specific key
+let dataList = localStorage.getItem(key);
+
+// Step 2: Set an empty array as the default value if dataList is null or not an array
+if (!dataList || !Array.isArray(JSON.parse(dataList))) {
+  dataList = JSON.stringify([]); // Convert the empty array to a JSON string
+  localStorage.setItem(key, dataList); // Set the default empty array in localStorage
+}
   // get vs set
 
   useEffect(() => {
@@ -55,7 +66,8 @@ const CartProvider = ({ children }) => {
     // dispatch({ type: "CART_TOTAL_PRICE" });
     dispatch({ type: "CART_ITEM_PRICE_TOTAL" });
 
-    localStorage.setItem("thapaCart", JSON.stringify(state.cart));
+  localStorage.setItem("thapaCart", JSON.stringify(state.cart));
+   
   }, [state.cart]);
 
   return (

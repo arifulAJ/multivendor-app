@@ -139,6 +139,8 @@ const cartReducer = (state, action) => {
   //     (accum, curElem) => {
   //       let { price, amount } = curElem;
 
+        
+
   //       accum.total_item += amount;
   //       accum.total_price += price * amount;
 
@@ -149,6 +151,7 @@ const cartReducer = (state, action) => {
   //       total_price: 0,
   //     }
   //   );
+  //   console.log(state)
   //   return {
   //     ...state,
   //     total_item,
