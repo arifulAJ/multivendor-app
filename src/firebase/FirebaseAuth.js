@@ -1,23 +1,25 @@
 import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import initializationAuthentic from "./Firebase.init";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+
 
 initializationAuthentic()
 
-const useFirebase=()=>{
-    
+const useFirebase=(location,navigate)=>{
+  
+ 
     const [user,setUser]=useState({})
     const [loading,setLoading]=useState(true)
-  
+    const [errorMessage,setErrorMessage]=useState(null)
+
+ const from= location?.state?.from?.pathname || "/"
     const googleProvider= new GoogleAuthProvider()
     const auth=getAuth()
     const [email,setEmail]=useState('');
 const [password,setPassword]=useState('');
-// const nevigate=useNavigate()
 
 
-console.log(email,password)
+
 const handelEmail=e=>{
 setEmail(e.target.value);
 }
@@ -29,8 +31,13 @@ const HandelSignIn=e=>{
   signInWithEmailAndPassword(auth,email,password)
   .then((useCredentail)=>{
     const user=useCredentail.user
+    alert("your data submiteded")
+    console.log(user)
+    email.reset()
+    navigate(from,{replace:true})
   })
   .catch((error)=>{
+    setErrorMessage(error.message);
     console.log(error)
   })
 }
@@ -43,8 +50,12 @@ createUserWithEmailAndPassword(auth, email, password)
     
     setUser(result)
     alert("your data submited")
+     navigate(from,{replace:true})
    
     
+  })
+  .catch(error=>{
+    setErrorMessage(error.message);
   })
 e.preventDefault()
 }
@@ -55,9 +66,10 @@ e.preventDefault()
         .then(result=>{
             setUser(result.user)
            alert("your data accepted")
-           
+           navigate(from,{replace:true})
         })
         .catch(error=>{
+          setErrorMessage(error.message);
       console.log(error,"error")
         })
     }
@@ -87,7 +99,8 @@ e.preventDefault()
         HandelRegistration,
         HandelSignIn,
         logOut,
-        loading
+        loading,
+        errorMessage
     }
 
 }

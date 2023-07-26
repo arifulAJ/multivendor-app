@@ -1,14 +1,19 @@
 
 import "./signin.css"
 import useFirebase from "../firebase/FirebaseAuth";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 
 
 const SignIn = () => {
-    const {GoogleSignIn,handelEmail,handelPassword,HandelSignIn}=useFirebase();
+  const navigate=useNavigate()
+  const location=useLocation()
+ 
+    const {GoogleSignIn,handelEmail,handelPassword,HandelSignIn,errorMessage}=useFirebase(location,navigate);
     return (
         <div   className="root" >
+          
+          {errorMessage===null? <p>nothing</p> :alert(`you have got ${errorMessage}`)}
         
       <div className="main">
      

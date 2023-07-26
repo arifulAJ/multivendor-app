@@ -10,7 +10,7 @@ const Nav = () => {
   const [menuIcon, setMenuIcon] = useState();
   const { total_item } = useCartContext();
   const {user,logOut}=useFirebase()
-console.log(user)
+
   const Nav = styled.nav`
     .navbar-lists {
       display: flex;
