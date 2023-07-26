@@ -4,6 +4,7 @@ import useFirebase from '../firebase/FirebaseAuth';
 export const AuthContext=createContext();
 const AuthProvider = ({ children}) => {
     const allContent=useFirebase();
+    
     return (
         <AuthContext.Provider value={allContent}>
             {children}

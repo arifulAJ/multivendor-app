@@ -46,8 +46,8 @@ const App = () => {
   };
 
   return (
-    <ThemeProvider theme={theme}>
       <AuthProvider>
+    <ThemeProvider theme={theme}>
       <Router>
         <GlobalStyle />
         <Header />
@@ -57,12 +57,12 @@ const App = () => {
           <Route path="/products" element={<Products />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/singleproduct/:id" element={<SingleProduct />} />
-          <Route element={<PrivetRoutes/>}>
-            <Route path="/shiping" element={<Shiping/>}/>
+          <Route path="/shiping" element={<PrivetRoutes><Shiping/></PrivetRoutes>}>
+            
            
 
           </Route>
-         
+        
           <Route path="/cart" element={<Cart />} />
           <Route path="/singin" element={<SignIn/>} />
           <Route path="/signup" element={<Register/>} />
@@ -70,8 +70,8 @@ const App = () => {
         </Routes>
         <Footer />
       </Router>
-      </AuthProvider>
     </ThemeProvider>
+      </AuthProvider>
   );
 };
 

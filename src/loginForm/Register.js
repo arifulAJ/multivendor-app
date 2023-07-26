@@ -4,7 +4,8 @@ import useFirebase from '../firebase/FirebaseAuth';
 import "./signin.css"
 
 const Register = () => {
-    const {user,handelEmail,handelPassword,HandelRegistration}=useFirebase()
+    const {handelEmail,handelPassword,HandelRegistration}=useFirebase()
+ 
 
     return (
         <div expand="lg"   className="root" >
@@ -21,7 +22,7 @@ const Register = () => {
            </div>
           
           <div style={{textAlign:"center"}}> <p >All ready have an account /<Link to='/singin'> Sign-in </Link></p></div>
-          <p>{user.email}</p>
+          
         </div>
     );
 };

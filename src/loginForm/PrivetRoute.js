@@ -1,18 +1,23 @@
 import React from 'react';
 
 
-import { Outlet,Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 import useAuth from '../Hooks/Auth';
 
-const PrivetRoutes = () => {
-    
-    const auth=useAuth()
+
+const PrivetRoutes = ({children}) => {
+   
+    const {user}=useAuth()
+   console.log(user)
   
-    return (
-      auth?.user?.email?<Outlet/>:<Navigate to="/singin"/>
-    );
+    
+  if(user){
+    return children
+  }
+  return <Navigate to={"/singin"}></Navigate>
+     
+    
 };
 
 export default PrivetRoutes;
-

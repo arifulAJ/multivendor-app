@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const  Shiping=()=> {
   const data = localStorage.getItem('thapaCart');
   const parsedData = JSON.parse(data);
-console.log(parsedData)
+
  
   return (
     <Purches>

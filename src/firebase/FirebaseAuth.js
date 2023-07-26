@@ -12,6 +12,9 @@ const useFirebase=()=>{
     const auth=getAuth()
     const [email,setEmail]=useState('');
 const [password,setPassword]=useState('');
+
+
+console.log(email,password)
 const handelEmail=e=>{
 setEmail(e.target.value);
 }
@@ -19,11 +22,13 @@ const handelPassword=e=>{
     setPassword(e.target.value);
 }
 const HandelRegistration=e=>{
-console.log(email,password);
+
 createUserWithEmailAndPassword(auth, email, password)
 .then((result) => {
     
     setUser(result)
+    alert("your data submited")
+    
   })
 e.preventDefault()
 }
@@ -33,8 +38,7 @@ e.preventDefault()
         signInWithPopup(auth,googleProvider)
         .then(result=>{
             setUser(result.user)
-            console.log(result.user.email
-                )
+           alert("your data accepted")
         })
         .catch(error=>{
       console.log(error,"error")
@@ -43,15 +47,20 @@ e.preventDefault()
     const logOut=()=>{
         signOut(auth)
         .then(() => {
+            alert("do you want to logOut")
             setUser({})
+           
           })
     }
     useEffect(()=>{
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-            setUser(user)
-            } 
+      const unsubcribe=  onAuthStateChanged(auth, (currentUser) => {
+          //  console.log("auth state change ",currentUser)
+           setUser(currentUser)
+            
           });
+          return ()=>{
+            unsubcribe();
+          }
     },[])
     return{
         GoogleSignIn,user,
