@@ -1,14 +1,16 @@
 import styled from "styled-components";
 import { useCartContext } from "./context/cart_context";
 import CartItem from "./components/CartItem";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Button } from "./styles/Button";
 import FormatPrice from "./Helpers/FormatPrice";
 
+
 const Cart = () => {
+ 
   const { cart, clearCart, total_price, shipping_fee } = useCartContext();
   // console.log("🚀 ~ file: Cart.js ~ line 6 ~ Cart ~ cart", cart);
-console.log(cart)
+
   if (cart.length === 0) {
     return (
       <EmptyDiv>
@@ -67,10 +69,25 @@ console.log(cart)
             </div>
           </div>
         </div>
+       
+      <PlaceOrder style={{textAlign:"center",display:"flex",justifyContent:"flex-end"}}>  <p className="orderStyle" > <Link style={{color:"white"}} to={"/shiping"}>Place Order</Link></p></PlaceOrder>
+
+     
+     
       </div>
+      
     </Wrapper>
   );
 };
+const PlaceOrder=styled.div`
+
+
+  .orderStyle{
+    font-size:30px;
+    width:30%;
+    align-items:end;
+  background:#6254F3
+}`
 
 const EmptyDiv = styled.div`
   display: grid;
@@ -83,6 +100,7 @@ const EmptyDiv = styled.div`
     font-weight: 300;
   }
 `;
+
 
 const Wrapper = styled.section`
   padding: 9rem 0;
@@ -233,7 +251,10 @@ const Wrapper = styled.section`
     .cart-hide {
       display: none;
     }
-
+    .orderStyle{
+      width:60%;
+      font-size:20px
+    }
     .cart-two-button {
       margin-top: 2rem;
       display: flex;

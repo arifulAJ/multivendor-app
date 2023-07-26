@@ -11,8 +11,15 @@ import { GlobalStyle } from "./GlobalStyle";
 import { ThemeProvider } from "styled-components";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Shiping from "./components/Shiping";
+import AuthProvider from "./context/AuthProvider";
+import PrivetRoutes from "./loginForm/PrivetRoute";
+import SignIn from "./loginForm/SignIn";
+import Register from "./loginForm/Register";
+
 
 const App = () => {
+ 
   const theme = {
     colors: {
       heading: "rgb(24 24 29)",
@@ -40,6 +47,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <AuthProvider>
       <Router>
         <GlobalStyle />
         <Header />
@@ -49,11 +57,20 @@ const App = () => {
           <Route path="/products" element={<Products />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/singleproduct/:id" element={<SingleProduct />} />
+          <Route element={<PrivetRoutes/>}>
+            <Route path="/shiping" element={<Shiping/>}/>
+           
+
+          </Route>
+         
           <Route path="/cart" element={<Cart />} />
+          <Route path="/singin" element={<SignIn/>} />
+          <Route path="/signup" element={<Register/>} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
         <Footer />
       </Router>
+      </AuthProvider>
     </ThemeProvider>
   );
 };

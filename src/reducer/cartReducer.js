@@ -151,7 +151,7 @@ const cartReducer = (state, action) => {
         total_price: 0,
       }
     );
-    console.log(state)
+    
     return {
       ...state,
       total_item,

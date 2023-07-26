@@ -5,17 +5,17 @@ const CartContext = createContext();
 
 const getLocalCartData = () => {
   let localCartData = localStorage.getItem("thapaCart");
-  console.log(localCartData)
+  // console.log(localCartData)
   if (localCartData === []) {
     return [];
   } else {
     return JSON.parse(localCartData);
   }
 };
-console.log(getLocalCartData())
+
 const initialState = {
-  //  cart: [],
-   cart: getLocalCartData(),
+    // cart: [],
+   cart: getLocalCartData() ||[],
   total_item: "",
   total_price: "",
   shipping_fee: 50000,

@@ -4,10 +4,12 @@ import styled from "styled-components";
 import { FiShoppingCart } from "react-icons/fi";
 import { CgMenu, CgClose } from "react-icons/cg";
 import { useCartContext } from "../context/cart_context";
+import useFirebase from "../firebase/FirebaseAuth";
 
 const Nav = () => {
   const [menuIcon, setMenuIcon] = useState();
   const { total_item } = useCartContext();
+  const {user,logOut}=useFirebase()
 
   const Nav = styled.nav`
     .navbar-lists {
@@ -199,6 +201,24 @@ const Nav = () => {
               Contact
             </NavLink>
           </li>
+         {
+          !user.email? <li>
+          <NavLink
+            to="/singin"
+            className="navbar-link "
+            onClick={() => setMenuIcon(false)}>
+            log-in
+          </NavLink>
+        </li>: <li>
+            <NavLink
+              to="/signup"
+              className="navbar-link "
+              onClick={logOut
+              }>
+              Log-out 
+            </NavLink>
+          </li>
+         }
           <li>
             <NavLink to="/cart" className="navbar-link cart-trolley--link">
               <FiShoppingCart className="cart-trolley" />
