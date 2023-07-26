@@ -1,17 +1,20 @@
-import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import initializationAuthentic from "./Firebase.init";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 initializationAuthentic()
 
 const useFirebase=()=>{
     
     const [user,setUser]=useState({})
+    const [loading,setLoading]=useState(true)
   
     const googleProvider= new GoogleAuthProvider()
     const auth=getAuth()
     const [email,setEmail]=useState('');
 const [password,setPassword]=useState('');
+// const nevigate=useNavigate()
 
 
 console.log(email,password)
@@ -21,6 +24,18 @@ setEmail(e.target.value);
 const handelPassword=e=>{
     setPassword(e.target.value);
 }
+//sign in
+const HandelSignIn=e=>{
+  signInWithEmailAndPassword(auth,email,password)
+  .then((useCredentail)=>{
+    const user=useCredentail.user
+  })
+  .catch((error)=>{
+    console.log(error)
+  })
+}
+
+// registation 
 const HandelRegistration=e=>{
 
 createUserWithEmailAndPassword(auth, email, password)
@@ -28,6 +43,7 @@ createUserWithEmailAndPassword(auth, email, password)
     
     setUser(result)
     alert("your data submited")
+   
     
   })
 e.preventDefault()
@@ -39,6 +55,7 @@ e.preventDefault()
         .then(result=>{
             setUser(result.user)
            alert("your data accepted")
+           
         })
         .catch(error=>{
       console.log(error,"error")
@@ -56,6 +73,7 @@ e.preventDefault()
       const unsubcribe=  onAuthStateChanged(auth, (currentUser) => {
           //  console.log("auth state change ",currentUser)
            setUser(currentUser)
+           setLoading(false)
             
           });
           return ()=>{
@@ -67,7 +85,9 @@ e.preventDefault()
         handelEmail,
         handelPassword,
         HandelRegistration,
-        logOut
+        HandelSignIn,
+        logOut,
+        loading
     }
 
 }

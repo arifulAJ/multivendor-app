@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 
 const SignIn = () => {
-    const {GoogleSignIn,handelEmail,handelPassword,HandelRegistration}=useFirebase();
+    const {GoogleSignIn,handelEmail,handelPassword,HandelSignIn}=useFirebase();
     return (
         <div   className="root" >
         
@@ -15,7 +15,7 @@ const SignIn = () => {
        <input onBlur={handelEmail} className="field"  type="email" placeholder="Enter your email" /><br />
       
        <input onBlur={handelPassword} className="field"  type="password" placeholder="Enter your password" /><br />
-       <button onClick={HandelRegistration} className="button" style={{width:"208px"}} variant="danger">Sign In</button><br />
+       <button onClick={HandelSignIn} className="button" style={{width:"208px"}} variant="danger">Sign In</button><br />
     
       
      
