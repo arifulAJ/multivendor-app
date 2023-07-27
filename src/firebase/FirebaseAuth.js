@@ -13,6 +13,7 @@ const useFirebase=(location,navigate)=>{
     const [errorMessage,setErrorMessage]=useState(null)
 
  const from= location?.state?.from?.pathname || "/"
+
     const googleProvider= new GoogleAuthProvider()
     const auth=getAuth()
     const [email,setEmail]=useState('');
@@ -32,8 +33,7 @@ const HandelSignIn=e=>{
   .then((useCredentail)=>{
     const user=useCredentail.user
     alert("your data submiteded")
-    console.log(user)
-    email.reset()
+    
     navigate(from,{replace:true})
   })
   .catch((error)=>{

@@ -1,10 +1,13 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useFirebase from '../firebase/FirebaseAuth';
 
 import "./signin.css"
 
 const Register = () => {
-    const {handelEmail,handelPassword,HandelRegistration}=useFirebase()
+  const navigate=useNavigate()
+  const location=useLocation()
+ 
+    const {handelEmail,handelPassword,HandelRegistration}=useFirebase(location,navigate)
  
 
     return (
