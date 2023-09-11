@@ -41,7 +41,7 @@ Before you begin, ensure you have the following installed:
 1. Clone the repository:
 
    ```shell
-   git clone https://github.com/your-username/e-commerce-web-app.git
+   git clone https://github.com/arifulAJ/multivendor-app.git
 
 
 
